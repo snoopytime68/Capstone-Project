@@ -1,571 +1,306 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Liam Fryar — Junior ICAP Capstone</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Clockwork Capstone</title>
+<meta name="viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
+<style>
+/* Layout: sticky brass nav, hero with meshing gears and a pressure gauge, then riveted panels for each section. */
+:root {
+  --bg: #1a130e;
+  --panel: #2a1e16;
+  --panel-edge: #4a3524;
+  --brass: #d1a246;
+  --copper: #b9683b;
+  --parchment: #ecdfc3;
+  --muted: #b9a88c;
+  --verdigris: #7fb0a6;
+  --font-display: "Cinzel Decorative", "Trajan Pro", Georgia, serif;
+  --font-body: "Crimson Pro", Georgia, "Times New Roman", serif;
+  --font-util: "Special Elite", "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(185,104,59,.16), transparent 55%),
+    radial-gradient(ellipse at 90% 40%, rgba(127,176,166,.08), transparent 50%),
+    var(--bg);
+  background-color: var(--bg);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--bg);
+}
+a { color: var(--brass); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--verdigris); outline-offset: 3px; }
+.wrap { width: 100%; max-width: 1072px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
-<!-- ══════════════ NAV ══════════════ -->
-<nav>
-  <a href="#" class="nav-logo" onclick="showPage('home')">LF</a>
-  <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
-    <li><a href="#" onclick="showPage('about')" id="nav-about">About Me</a></li>
-    <li><a href="#" onclick="showPage('employ')" id="nav-employ">Employability</a></li>
-    <li><a href="#" onclick="showPage('future')" id="nav-future">Future Plans</a></li>
-  </ul>
-</nav>
+/* nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: rgba(26,19,14,.94);
+  border-bottom: 2px solid var(--brass);
+  box-shadow: 0 2px 0 #000, 0 6px 14px rgba(0,0,0,.5);
+}
+.nav .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1.5rem; padding-block: .7rem; }
+.brand { font-family: var(--font-display); font-size: 1rem; color: var(--brass); text-decoration: none; letter-spacing: .04em; }
+.nav ul { display: flex; flex-wrap: wrap; gap: .2rem 1.2rem; list-style: none; margin: 0; padding: 0; }
+.nav li a { font-family: var(--font-util); font-size: .9rem; color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: .08em; }
+.nav li a:hover { color: var(--parchment); }
 
-<!-- ══════════════ HOME PAGE ══════════════ -->
-<div class="page active" id="page-home">
-  <div class="home-hero">
-    <div class="home-tag">// Junior ICAP Capstone 2025–2026</div>
-    <h1 class="home-name">Liam<br><span>Fryar.</span></h1>
-    <p class="home-mission">
-      "To be supportive to other people, be well equipped for the job, and get the job done with quality."
-    </p>
-    <a class="home-email" href="mailto:liam.f@windsorcharteracademy.org">liam.f@windsorcharteracademy.org</a>
+/* hero */
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem; align-items: center; padding-block: 3.5rem 3rem; }
+.hero > * { min-width: 0; }
+.eyebrow { font-family: var(--font-util); color: var(--copper); text-transform: uppercase; letter-spacing: .14em; font-size: .9rem; margin: 0 0 .8rem; }
+h1 { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.1; margin: 0 0 1rem; color: var(--brass); text-wrap: balance; text-shadow: 0 2px 0 #000; }
+.lede { max-width: 34rem; color: var(--parchment); margin: 0 0 1.6rem; }
+.btns { display: flex; flex-wrap: wrap; gap: .8rem; }
+.btn {
+  font-family: var(--font-util); text-transform: uppercase; letter-spacing: .1em; font-size: .95rem;
+  padding: .7rem 1.3rem; text-decoration: none; border: 2px solid var(--brass); color: var(--bg);
+  background: linear-gradient(180deg, #e3b85c, #b88a2f); border-radius: 3px; box-shadow: 0 3px 0 #6d4f17;
+}
+.btn.ghost { background: transparent; color: var(--brass); box-shadow: none; }
+.btn:hover { filter: brightness(1.12); }
+.machine { display: grid; place-items: center; gap: 1rem; }
+.machine svg { width: 100%; height: auto; max-width: 400px; }
+.needle { transform-origin: 100px 100px; transform: rotate(38deg); animation: wobble 5s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes wobble { 0%,100% { transform: rotate(38deg); } 50% { transform: rotate(46deg); } }
+
+/* sections */
+section { padding-block: 2.5rem; scroll-margin-top: 4.5rem; }
+h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 2.1rem); color: var(--brass); margin: 0 0 1.2rem; text-wrap: balance; }
+.rule { height: 10px; margin: 0 0 1.6rem; background: repeating-linear-gradient(90deg, var(--brass) 0 18px, transparent 18px 26px); opacity: .55; border-radius: 5px; }
+.panel {
+  position: relative; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 6px;
+  padding: 1.6rem 1.6rem 1.6rem; box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--panel-edge), 0 8px 22px rgba(0,0,0,.45);
+}
+.panel::before, .panel::after, .rivets::before, .rivets::after {
+  content: ""; position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f1d28a, #8a6420 70%); box-shadow: 0 1px 2px #000;
+}
+.panel::before { top: 12px; left: 12px; } .panel::after { top: 12px; right: 12px; }
+.rivets::before { bottom: 12px; left: 12px; } .rivets::after { bottom: 12px; right: 12px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.two > * { min-width: 0; }
+h3 { font-family: var(--font-util); font-weight: 400; font-size: 1.05rem; color: var(--verdigris); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 .5rem; }
+p { margin: 0 0 1rem; }
+.ph { color: var(--muted); font-style: italic; }
+
+/* process: a real sequence, drawn as a pipeline */
+.pipe { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; position: relative; }
+.pipe li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; align-items: start; position: relative; }
+.pipe li:not(:last-child)::before {
+  content: ""; position: absolute; left: calc(1.6rem - 4px); top: 3.2rem; bottom: -1rem; width: 8px;
+  background: linear-gradient(90deg, #7a4a28, var(--copper), #7a4a28); border-radius: 4px;
+}
+.valve {
+  width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 1.2rem; color: var(--bg);
+  background: radial-gradient(circle at 35% 30%, #f1d28a, #a77a26 75%); border: 2px solid #5c4113; box-shadow: 0 2px 0 #000;
+}
+.pipe .body { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 4px; padding: .8rem 1.1rem; }
+.pipe .when { font-family: var(--font-util); font-size: .85rem; color: var(--copper); letter-spacing: .08em; text-transform: uppercase; }
+.pipe .body p { margin: .2rem 0 0; }
+
+/* exhibits */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.cards > * { min-width: 0; }
+.exhibit { background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+.plate {
+  aspect-ratio: 4 / 3; max-width: 100%; display: grid; place-items: center; text-align: center; padding: 1rem;
+  font-family: var(--font-util); color: var(--muted); font-size: .95rem;
+  background: repeating-linear-gradient(45deg, #231911 0 12px, #2c2017 12px 24px); border-bottom: 2px solid var(--brass);
+}
+.exhibit .cap { padding: 1rem 1.1rem 1.2rem; }
+.exhibit .cap .tag { font-family: var(--font-util); font-size: .8rem; color: var(--copper); letter-spacing: .12em; text-transform: uppercase; }
+.exhibit h3 { color: var(--parchment); text-transform: none; letter-spacing: .02em; font-size: 1.2rem; margin: .2rem 0 .4rem; }
+.exhibit p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+/* reflection + contact */
+blockquote { margin: 0; padding: 0 0 0 1.2rem; border-left: 4px solid var(--copper); font-size: 1.35rem; font-style: italic; }
+blockquote footer { font-family: var(--font-util); font-style: normal; font-size: .9rem; color: var(--muted); margin-top: .6rem; }
+.mono { font-family: var(--font-util); color: var(--brass); overflow-wrap: anywhere; }
+footer.site { text-align: center; font-family: var(--font-util); color: var(--muted); font-size: .85rem; padding-block: 2rem 2.5rem; border-top: 2px solid var(--panel-edge); margin-top: 2rem; }
+
+.skills { margin: 0; padding-left: 1.2rem; }
+.skills li { margin-bottom: .5rem; }
+.skills li::marker { color: var(--brass); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-block: 2rem; }
+  .two, .cards { grid-template-columns: 1fr; }
+  .machine { order: -1; }
+  .machine svg { max-width: 300px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .needle { animation: none; }
+}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">The Clockwork Capstone</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">All About Me</a></li>
+        <li><a href="#employability">Employability</a></li>
+        <li><a href="#projects">Projects &amp; Activities</a></li>
+        <li><a href="#future">Future Plans</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Senior Capstone &middot; [Class of 20XX]</p>
+      <h1>[Your Project Title Goes Here]</h1>
+      <p class="lede">How I have grown during high school, and where my plans lead next. Replace this line with your own summary.</p>
+      <div class="btns">
+        <a class="btn" href="#projects">See My Projects</a>
+        <a class="btn ghost" href="#future">Future Plans</a>
+      </div>
+    </div>
+    <div class="machine" aria-hidden="true">
+      <svg viewBox="0 0 200 124" role="img" aria-label="Pressure gauge showing the project nearly complete" style="max-width:320px">
+        <defs>
+          <radialGradient id="brassG" cx="35%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#f1d28a"/><stop offset=".6" stop-color="#c8993f"/><stop offset="1" stop-color="#7a5519"/>
+          </radialGradient>
+          <radialGradient id="copperG" cx="35%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#e59a6b"/><stop offset=".6" stop-color="#b9683b"/><stop offset="1" stop-color="#6a3519"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="92" fill="#1f160f" stroke="url(#brassG)" stroke-width="8"/>
+        <path d="M 28 100 A 72 72 0 0 1 172 100" fill="none" stroke="#4a3524" stroke-width="10"/>
+        <path d="M 28 100 A 72 72 0 0 1 128 34" fill="none" stroke="#7fb0a6" stroke-width="10" opacity=".85"/>
+        <g id="ticks" stroke="#d1a246" stroke-width="2"></g>
+        <rect x="2" y="102" width="196" height="18" rx="4" fill="url(#brassG)" stroke="#3b2a0d" stroke-width="2"/>
+        <text x="100" y="115" text-anchor="middle" font-family="Special Elite, monospace" font-size="10" letter-spacing="2" fill="#2a1e16">PROGRESS</text>
+        <g class="needle"><line x1="100" y1="100" x2="100" y2="38" stroke="#ecdfc3" stroke-width="3" stroke-linecap="round"/></g>
+        <circle cx="100" cy="100" r="7" fill="url(#brassG)" stroke="#3b2a0d"/>
+      </svg>
+    </div>
   </div>
 
-  <!-- PHOTOS SECTION -->
-  <div style="padding: 0 2.5rem 3rem; opacity:0; animation: fadeUp 0.6s ease forwards 0.75s;">
-    <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--accent); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem;">// Photos</div>
-    <div style="display:flex; flex-wrap:wrap; gap:1rem;">
-      <img src="images/IMG_0399.jpeg" style="height:220px; width:auto; border-radius:8px; border:1px solid #2a2a2a; object-fit:cover;">
-      <img src="images/IMG_0406.jpeg" style="height:220px; width:auto; border-radius:8px; border:1px solid #2a2a2a; object-fit:cover;">
-      <img src="images/IMG_0450.jpeg" style="height:220px; width:auto; border-radius:8px; border:1px solid #2a2a2a; object-fit:cover;">
-    </div>
-    <p style="font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--muted); margin-top:0.75rem;">→ Replace placeholder boxes with &lt;img src="yourfile.jpg"&gt; — add as many as you want</p>
-  </div>
-
-  <div class="home-grid">
-    <div class="home-stat">
-      <div class="home-stat-num">11th</div>
-      <div class="home-stat-label">Grade</div>
-    </div>
-    <div class="home-stat">
-      <div class="home-stat-num">WCA</div>
-      <div class="home-stat-label">Windsor Charter Academy</div>
-    </div>
-    <div class="home-stat">
-      <div class="home-stat-num">2026</div>
-      <div class="home-stat-label">Graduating Class</div>
-    </div>
-  </div>
-
-  <footer>© 2026 Liam Fryar &nbsp;·&nbsp; Windsor Charter Academy</footer>
-</div>
-
-<!-- ══════════════ ABOUT ME ══════════════ -->
-<div class="page" id="page-about">
-  <div class="section">
-    <div class="section-label">// 01</div>
-    <h2 class="section-title">About Me</h2>
-    <div class="divider"></div>
-
-    <!-- Personality -->
-    <div class="card">
-      <div class="card-title">Personality — YouScience Assessment</div>
-      <p>I took the YouScience aptitude assessment, which measures natural strengths that stay stable over time — not just what you've learned, but how your brain is actually wired. Here's what I found out about myself:</p>
-
-      <div style="margin-top:1.5rem;">
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.75rem;">Top Aptitudes</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
-          <div style="background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:1rem; text-align:center;">
-            <div style="color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Spatial Visualization</div>
-            <p style="font-size:0.82rem; color:var(--muted);">I can visualize 3D objects and rotate them mentally — natural fit for design, building, and tech work.</p>
-          </div>
-          <div style="background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:1rem; text-align:center;">
-            <div style="color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Visual Comparison Speed</div>
-            <p style="font-size:0.82rem; color:var(--muted);">I spot errors and differences fast. My brain automatically picks up on inconsistencies others miss.</p>
-          </div>
-          <div style="background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:1rem; text-align:center;">
-            <div style="color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Idea Generation</div>
-            <p style="font-size:0.82rem; color:var(--muted);">I can generate multiple ideas at once without getting overwhelmed. I know when to stop brainstorming and act.</p>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:1.5rem;">
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.75rem;">Top Interest Areas (RIASEC)</p>
-        <div class="tags">
-          <span class="tag">Realistic — Hands-on &amp; practical</span>
-          <span class="tag">Conventional — Detail-oriented &amp; structured</span>
-          <span class="tag">Investigative — Research &amp; problem-solving</span>
-        </div>
-      </div>
-
-      <div style="margin-top:1.5rem;">
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.75rem;">What I Learned About Myself</p>
-        <p style="color:var(--muted); line-height:1.7; font-size:0.92rem;">The results confirmed a lot of things I already suspected. I work best when I have a long-term goal to aim at — I'm motivated to push through boring requirements if I know there's something meaningful at the end. I'm socially flexible, meaning I can work in groups or alone, but I need solo time to recharge. My spatial visualization score explains why 3D printing, circuit building, and designing things clicks so naturally for me. The investigative interest area matches my instinct to ask "why" and dig until I actually understand something rather than just accepting the surface answer.</p>
-      </div>
-
-      <div style="margin-top:1.5rem;">
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.5rem;">Words That Describe Me (from YouScience)</p>
-        <div class="tags">
-          <span class="tag">Discerning</span>
-          <span class="tag">Born Researcher</span>
-          <span class="tag">Visual Mind</span>
-          <span class="tag">Future Focused</span>
-          <span class="tag">Determined</span>
-          <span class="tag">Motivated</span>
-          <span class="tag">Socially Flexible</span>
-          <span class="tag">Specialized</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Interests -->
-    <div class="card">
-      <div class="card-title">Interests</div>
-      <p>My biggest interests are 3D printing, PC gaming, and building things. I enjoy pushing hardware and software to see what they're capable of — whether that's designing something in a slicer, exploring open-world games, or tinkering with circuits.</p>
-      <div class="tags">
-        <span class="tag">3D Printing</span>
-        <span class="tag">Valorant</span>
-        <span class="tag">Star Citizen</span>
-        <span class="tag">PC Gaming</span>
-        <span class="tag">Circuit Building</span>
-        <span class="tag">Python</span>
-      </div>
-    </div>
-
-    <!-- Strengths -->
-    <div class="card">
-      <div class="card-title">Strengths</div>
-      <p>My biggest strength is problem solving — specifically finding solutions that other people wouldn't think to try. When something isn't working, I don't just look for the obvious fix; I look for the weird one that actually works. As the quote I live by goes:</p>
-      <div class="quote-block" style="margin: 1rem 0 0;">
-        <blockquote>"If it looks stupid but works, it ain't stupid."</blockquote>
-        <cite>— Trupen</cite>
-      </div>
-    </div>
-
-    <!-- Goals -->
-    <div class="card">
-      <div class="card-title">Goals</div>
-      <div class="two-col">
+  <section id="about">
+    <h2>All About Me</h2>
+    <div class="rule"></div>
+    <div class="panel rivets">
+      <div class="two">
         <div>
-          <p style="font-size:0.8rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Short Term</p>
-          <p>Get my first job and start building financial independence.</p>
+          <h3>Who I Am</h3>
+          <p>Introduce yourself: your interests, your school, and what matters to you. <span class="ph">[Replace with your own text.]</span></p>
         </div>
         <div>
-          <p style="font-size:0.8rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Long Term</p>
-          <p>Develop and publish my own game in Python on Steam, and buy my first car.</p>
+          <h3>How I Have Grown</h3>
+          <p>Describe how you have changed since freshman year and what caused it. <span class="ph">[Replace with your own text.]</span></p>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Bucket List -->
-    <div class="card">
-      <div class="card-title">Bucket List</div>
-      <ul class="bucket-list" style="margin-top:0.5rem;">
-        <li><span class="bucket-num">01</span> Run a 3D printing business</li>
-        <li><span class="bucket-num">02</span> Become a solo dev & sell on Steam</li>
-        <li><span class="bucket-num">03</span> Get good at crypto trading</li>
-        <li><span class="bucket-num">04</span> Start a family</li>
-        <li><span class="bucket-num">05</span> Make a genuinely useful tool</li>
-        <li><span class="bucket-num">06</span> Get decent at fishing</li>
-        <li><span class="bucket-num">07</span> Build a custom desktop PC</li>
-        <li><span class="bucket-num">08</span> Build custom circuit projects</li>
-        <li><span class="bucket-num">09</span> Own my own house</li>
-        <li><span class="bucket-num">10</span> Get a house on a lake</li>
-      </ul>
-    </div>
-
-    <!-- Quote -->
-    <div class="card">
-      <div class="card-title">Meaningful Quote</div>
-      <div class="quote-block">
-        <blockquote>"If it looks stupid but works, it ain't stupid."</blockquote>
-        <cite>— Trupen</cite>
-      </div>
-      <p style="margin-top:1rem;">This quote matters to me because it reflects how I approach everything — school, tech, gaming, life. Society pushes you to do things the "right" way, but if your weird solution actually works, it wasn't wrong. It's taught me to trust my instincts even when my approach looks unconventional to others.</p>
-    </div>
-
-    <!-- Habits of Mind -->
-    <div class="card">
-      <div class="card-title">Habits of Mind</div>
-
-      <div style="margin-bottom:1.5rem;">
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.5rem;">Thinking Interdependently</p>
-        <p>This year I improved on working as part of a team, especially through VEX Robotics. Building a robot requires everyone to contribute their part — mechanical, coding, driving — and none of it works if you're not communicating and relying on each other. My internship also pushed this: preparing and repairing Chromebooks for the whole school means my work directly affects students and teachers I may never even meet.</p>
-      </div>
-
-      <div>
-        <p style="font-weight:700; color:var(--text); margin-bottom:0.5rem;">Gathering Data Through All Senses</p>
-        <p>Working as a tech assistant taught me to pay close attention to what a broken device is actually doing — not just error messages, but sounds, heat, how it physically feels when you handle it. Diagnosing a malfunctioning Chromebook isn't always about reading a screen; sometimes it's about noticing something smells burnt, or that a hinge feels wrong. I've gotten much better at using all available information before jumping to conclusions.</p>
-      </div>
-    </div>
-
-  </div>
-  <footer>© 2026 Liam Fryar &nbsp;·&nbsp; Windsor Charter Academy</footer>
-</div>
-
-<!-- ══════════════ EMPLOYABILITY ══════════════ -->
-<div class="page" id="page-employ">
-  <div class="section">
-    <div class="section-label">// 02</div>
-    <h2 class="section-title">Employability</h2>
-    <div class="divider"></div>
-
-    <!-- RESUME -->
-    <div class="card">
-      <div class="card-title">Résumé</div>
-
-      <div style="text-align:center; margin-bottom:2rem;">
-        <div style="font-size:1.3rem; font-weight:800; letter-spacing:0.05em;">LIAM FRYAR</div>
-        <div style="font-family:'Space Mono',monospace; font-size:0.78rem; color:var(--muted); margin-top:0.3rem;">
-          Severance, CO &nbsp;|&nbsp; liam.f@windsorcharteracademy.org
+  <section id="employability">
+    <h2>Employability</h2>
+    <div class="rule"></div>
+    <div class="panel rivets">
+      <div class="two">
+        <div>
+          <h3>Skills</h3>
+          <ul class="skills">
+            <li>[Skill, such as teamwork or communication]</li>
+            <li>[Skill, such as problem solving]</li>
+            <li>[Skill, such as a tool or program you use]</li>
+          </ul>
         </div>
-      </div>
-
-      <div class="resume-section">
-        <h3>Objective</h3>
-        <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
-          Motivated junior at Windsor Charter Academy seeking a part-time position at a tech retail store. Bringing hands-on experience repairing and maintaining Chromebooks, strong problem-solving skills, and a genuine passion for technology.
-        </p>
-      </div>
-
-      <div class="resume-section">
-        <h3>Experience</h3>
-        <div class="resume-entry">
-          <div class="resume-entry-left">
-            <div class="resume-entry-title">Technology Assistant Intern</div>
-            <div class="resume-entry-sub">Windsor Charter Academy — Severance, CO</div>
-            <ul class="resume-bullets">
-              <li>Prepared and repaired Chromebooks for the upcoming school year</li>
-              <li>Diagnosed hardware and software issues on student devices</li>
-              <li>Supported IT staff with equipment setup and maintenance tasks</li>
-              <li>Managed device inventory and ensured readiness for student use</li>
-            </ul>
-          </div>
-          <div class="resume-entry-date">2025 – Present</div>
-        </div>
-      </div>
-
-      <div class="resume-section">
-        <h3>Education</h3>
-        <div class="resume-entry">
-          <div class="resume-entry-left">
-            <div class="resume-entry-title">Windsor Charter Academy</div>
-            <div class="resume-entry-sub">High School Diploma (In Progress) — Severance, CO</div>
-          </div>
-          <div class="resume-entry-date">2023 – 2027</div>
-        </div>
-      </div>
-
-      <div class="resume-section">
-        <h3>Activities & Extracurriculars</h3>
-        <div class="resume-entry">
-          <div class="resume-entry-left">
-            <div class="resume-entry-title">VEX Robotics Team</div>
-            <div class="resume-entry-sub">Windsor Charter Academy</div>
-          </div>
-          <div class="resume-entry-date">2024 – 2025</div>
-        </div>
-        <div class="resume-entry">
-          <div class="resume-entry-left">
-            <div class="resume-entry-title">Soccer</div>
-            <div class="resume-entry-sub">Windsor Charter Academy</div>
-          </div>
-          <div class="resume-entry-date">Prior years</div>
-        </div>
-      </div>
-
-      <div class="resume-section">
-        <h3>Skills</h3>
-        <div class="tags" style="margin-top:0;">
-          <span class="tag">Chromebook Repair</span>
-          <span class="tag">Hardware Troubleshooting</span>
-          <span class="tag">3D Printing</span>
-          <span class="tag">Python (Learning)</span>
-          <span class="tag">Problem Solving</span>
-          <span class="tag">Team Collaboration</span>
-          <span class="tag">Customer Service</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- COVER LETTER -->
-    <div class="card">
-      <div class="card-title">Cover Letter</div>
-      <div class="letter-block">
-        <div class="letter-header">
-          Liam Fryar<br>
-          Severance, CO<br>
-          liam.f@windsorcharteracademy.org<br>
-          <br>
-          May 2026<br>
-          <br>
-          Hiring Manager<br>
-          Tech Retail Store<br>
-          [City, CO]
-        </div>
-
-        <p>Dear Hiring Manager,</p>
-
-        <p>I am writing to apply for a part-time position at your tech retail store. As a junior at Windsor Charter Academy with real hands-on experience repairing and maintaining technology, I believe I would be a strong addition to your team.</p>
-
-        <p>This year I have been working as an unpaid technology intern at my school, where I prepare and repair Chromebooks for student use. This role has given me practical experience diagnosing hardware and software issues, managing device inventory, and making sure equipment is ready and reliable for the people who depend on it. I take pride in solving problems efficiently — even if my solutions aren't always the conventional ones.</p>
-
-        <p>I am passionate about technology in all forms, from 3D printing to PC hardware to software development. I am the kind of person who genuinely enjoys figuring out how things work and helping others when their tech isn't cooperating. Working in a tech retail environment would let me do exactly that while building professional experience in the field I plan to pursue long-term.</p>
-
-        <p>I am reliable, quick to learn, and comfortable working with customers and coworkers alike. I was also a member of my school's VEX Robotics team, which taught me how to collaborate under pressure toward a shared goal.</p>
-
-        <p>I would love the opportunity to speak with you further about how I can contribute to your team. Thank you for your time and consideration.</p>
-
-        <div class="letter-sign">
-          Sincerely,<br><br>
-          <strong>Liam Fryar</strong>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <footer>© 2026 Liam Fryar &nbsp;·&nbsp; Windsor Charter Academy</footer>
-</div>
-
-<!-- ══════════════ FUTURE PLANS ══════════════ -->
-<div class="page" id="page-future">
-  <div class="section">
-    <div class="section-label">// 03</div>
-    <h2 class="section-title">Future Plans</h2>
-    <div class="divider"></div>
-
-    <!-- Post-Secondary intro -->
-    <div class="card">
-      <div class="card-title">Post-Secondary Thinking</div>
-      <p>I haven't made a firm decision about college yet — and that's okay. My goals are centered around building real skills in technology and game development, whether that happens through a traditional four-year university, a trade or technical program, or self-directed learning and projects. What matters most to me is ending up doing work I care about.</p>
-    </div>
-
-    <!-- College 1 -->
-    <div class="card">
-      <div class="card-title">College Option 1 — Colorado State University (CSU)</div>
-      <p style="margin-bottom:1rem;">Located in Fort Collins, Colorado — just down the road from Severance. CSU offers a well-regarded Computer Science program with specializations that align with game development, software engineering, and applied computing.</p>
-      <ul class="resume-bullets" style="list-style:none;">
-        <li>Located in Fort Collins, CO — easy access from Severance</li>
-        <li>Bachelor of Science in Computer Science with multiple focus areas</li>
-        <li>Strong game design and software engineering course offerings</li>
-        <li>In-state tuition ~$12,000–$15,000/yr (financial aid available)</li>
-        <li>Large campus with extensive research and tech lab resources</li>
-        <li>Active student game development and robotics clubs</li>
-        <li>Internship and co-op connections with Colorado tech companies</li>
-        <li>Graduate programs available if further specialization is desired</li>
-        <li>Nationally ranked engineering and CS department</li>
-        <li>RAM scholarship opportunities for first-generation and STEM students</li>
-      </ul>
-      <div class="tags" style="margin-top:1rem;">
-        <span class="tag">Computer Science</span>
-        <span class="tag">Game Development</span>
-        <span class="tag">Engineering</span>
-        <span class="tag">Local</span>
-      </div>
-    </div>
-
-    <!-- College 2 -->
-    <div class="card">
-      <div class="card-title">College Option 2 — Aims Community College</div>
-      <p style="margin-bottom:1rem;">Located right in Windsor/Greeley, Colorado — practically local. Aims is a public community college focused on accessible, affordable education with strong career outcomes.</p>
-      <div class="quote-block" style="margin-bottom:1.5rem;">
-        <blockquote style="font-size:0.95rem;">"The mission of Aims Community College is to provide knowledge and skills to advance quality of life, economic vitality, and overall success of diverse communities."</blockquote>
-      </div>
-      <ul class="resume-bullets" style="list-style:none;">
-        <li>Located in Windsor/Greeley, CO — close to home, no relocation needed</li>
-        <li>Public school with 9,000 students</li>
-        <li>Tuition is only $72/credit hour vs. $313/hour at other schools — extremely affordable</li>
-        <li>~$14,000 per year total cost</li>
-        <li>100% acceptance rate — open enrollment, anyone can apply</li>
-        <li>200+ accredited degrees and certificates available</li>
-        <li>Most students graduate with certificates in their field</li>
-        <li>82% of graduates are employed after graduation</li>
-        <li>Offers college classes for high school students (concurrent enrollment)</li>
-        <li>Free travel to conferences and professional development opportunities</li>
-      </ul>
-      <div class="tags" style="margin-top:1rem;">
-        <span class="tag">Technology</span>
-        <span class="tag">Computer Science</span>
-        <span class="tag">Affordable</span>
-        <span class="tag">Local</span>
-      </div>
-    </div>
-
-    <!-- Career -->
-    <div class="card">
-      <div class="card-title">Career Direction</div>
-      <p>My long-term career goals are in technology — specifically indie game development and software tools. I'm currently learning Python and plan to build and publish a game on Steam. I'm also interested in 3D printing as both a hobby and a potential small business. My ideal career path involves creating things that people actually find useful, whether that's software, hardware, or something nobody has made yet.</p>
-      <div class="tags" style="margin-top:1rem;">
-        <span class="tag">Indie Game Dev</span>
-        <span class="tag">Software Tools</span>
-        <span class="tag">3D Printing Business</span>
-        <span class="tag">Circuit Design</span>
-        <span class="tag">IT / Tech Support</span>
-      </div>
-    </div>
-
-    <!-- RIASEC -->
-    <div class="card">
-      <div class="card-title">RIASEC Career Research Project</div>
-      <p style="color:var(--muted); margin-bottom:2rem;">My top 3 RIASEC categories are Investigative, Conventional, and Realistic. Here's what I researched for each one:</p>
-
-      <!-- Investigative -->
-      <div style="margin-bottom:2rem;">
-        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
-          <span style="background:var(--accent2); color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.8rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.1em;">1 — Investigative</span>
-        </div>
-        <p style="color:var(--muted); font-size:0.85rem; margin-bottom:1rem;">Analytical &amp; curious thinking · Problem-solving &amp; research · Science and data-driven work</p>
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.5rem;">
-          <p style="font-weight:700; margin-bottom:0.75rem;">Career Match: Materials Scientist</p>
-          <div class="two-col" style="margin-bottom:1rem;">
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Traits That Match Me</p>
-              <div class="tags"><span class="tag">Analytical thinking</span><span class="tag">Curiosity</span><span class="tag">Persistence</span></div>
-            </div>
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Job Outlook</p>
-              <p style="font-size:0.85rem; color:var(--muted);">Bachelor's or Master's in Materials Science · 4% growth · Avg. $106,000/yr</p>
-            </div>
-          </div>
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.5rem;">What They Actually Do</p>
-          <ul class="resume-bullets">
-            <li>Study properties of metals, polymers, ceramics, and composites to develop new materials</li>
-            <li>Conduct experiments testing how materials behave under stress, heat, and chemicals</li>
-            <li>Collaborate with engineers and scientists across aerospace, medicine, and tech industries</li>
+        <div>
+          <h3>Work and Volunteering</h3>
+          <ul class="skills">
+            <li>[Job or volunteer role, dates, and one thing you did]</li>
+            <li>[Job or volunteer role, dates, and one thing you did]</li>
+            <li>[Certification or award, if you have one]</li>
           </ul>
         </div>
       </div>
-
-      <!-- Conventional -->
-      <div style="margin-bottom:2rem;">
-        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
-          <span style="background:var(--accent2); color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.8rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.1em;">2 — Conventional</span>
-        </div>
-        <p style="color:var(--muted); font-size:0.85rem; margin-bottom:1rem;">Set procedures &amp; routines · Detail-oriented · Organized and rule-following</p>
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.5rem;">
-          <p style="font-weight:700; margin-bottom:0.75rem;">Career Match: Accountant &amp; Auditor</p>
-          <div class="two-col" style="margin-bottom:1rem;">
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Traits That Match Me</p>
-              <div class="tags"><span class="tag">Dependability</span><span class="tag">Integrity</span><span class="tag">Attention to detail</span></div>
-            </div>
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Job Outlook</p>
-              <p style="font-size:0.85rem; color:var(--muted);">Bachelor's in Accounting or Finance · 6% growth · Avg. $79,000/yr</p>
-            </div>
-          </div>
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.5rem;">What They Actually Do</p>
-          <ul class="resume-bullets">
-            <li>Organize, examine, and maintain financial records for individuals and organizations</li>
-            <li>Ensure financial statements follow laws and regulations; prepare tax returns</li>
-            <li>Suggest ways to reduce costs, improve revenue, and report findings to management</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Realistic -->
-      <div>
-        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
-          <span style="background:var(--accent2); color:var(--accent); font-family:'Space Mono',monospace; font-size:0.7rem; padding:0.3rem 0.8rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.1em;">3 — Realistic</span>
-        </div>
-        <p style="color:var(--muted); font-size:0.85rem; margin-bottom:1rem;">Hands-on &amp; practical work · Working with tools, machines, or technology · Physical environments</p>
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.5rem;">
-          <p style="font-weight:700; margin-bottom:0.75rem;">Career Match: Civil Engineer</p>
-          <div class="two-col" style="margin-bottom:1rem;">
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Traits That Match Me</p>
-              <div class="tags"><span class="tag">Dependability</span><span class="tag">Problem-solving</span><span class="tag">Initiative</span></div>
-            </div>
-            <div>
-              <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.4rem;">Job Outlook</p>
-              <p style="font-size:0.85rem; color:var(--muted);">Bachelor's in Civil Engineering · 5% growth · Avg. $95,000/yr</p>
-            </div>
-          </div>
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; margin-bottom:0.5rem;">What They Actually Do</p>
-          <ul class="resume-bullets">
-            <li>Plan and design roads, bridges, tunnels, water systems, and buildings using specialized software</li>
-            <li>Manage construction sites and ensure projects meet safety codes and standards</li>
-            <li>Analyze survey reports, maps, and geological data to determine best building methods</li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
-        <p style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--muted);">Sources: mynextmove.org · bls.gov/ooh</p>
-      </div>
     </div>
+  </section>
 
-    <!-- Finding Colleges That Fit -->
-    <div class="card">
-      <div class="card-title">Finding Colleges That Fit — One Pager</div>
-      <p style="margin-bottom:1.5rem; color:var(--muted);">As part of the college research process, I completed a "Finding Colleges That Fit" one-pager on Aims Community College.</p>
-
-      <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.5rem;">
-        <p style="font-size:1.1rem; font-weight:800; margin-bottom:1.25rem;">Aims Community College</p>
-
-        <div class="two-col" style="margin-bottom:1.25rem;">
-          <div>
-            <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Price</p>
-            <p style="font-size:0.9rem;">$2,760 per year</p>
-          </div>
-          <div>
-            <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Admittance</p>
-            <p style="font-size:0.9rem;">Undergraduate</p>
-          </div>
-          <div>
-            <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">SAT Scores Required</p>
-            <p style="font-size:0.9rem;">Reading: 430+ · Math: 460+</p>
-          </div>
-          <div>
-            <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Average GPA</p>
-            <p style="font-size:0.9rem;">Not stated, but higher than 2.0</p>
-          </div>
-        </div>
-
-        <div style="margin-bottom:1.25rem;">
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Top 5 Subjects</p>
-          <div class="tags">
-            <span class="tag">Liberal Arts &amp; Humanities</span>
-            <span class="tag">Nursing Assistant</span>
-            <span class="tag">Welding</span>
-            <span class="tag">Automotive Mechanics</span>
-            <span class="tag">Emergency Medical Technician</span>
-          </div>
-        </div>
-
-        <div style="margin-bottom:1.25rem;">
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Financial Aid</p>
-          <p style="font-size:0.9rem; color:var(--muted);">85% of students received financial aid</p>
-        </div>
-
-        <div style="margin-bottom:1.25rem;">
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Why Attend</p>
-          <p style="font-size:0.9rem; color:var(--muted);">Very affordable and has a diverse range of subjects.</p>
-        </div>
-
-        <div>
-          <p style="font-size:0.75rem; color:var(--accent); font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Why I'm Interested</p>
-          <p style="font-size:0.9rem; color:var(--muted);">College is expensive but also rewarding. The career I want doesn't require college at all, so this is a cheap alternative that still has the subjects I'm interested in.</p>
-        </div>
-      </div>
+  <section id="projects">
+    <h2>Projects &amp; Activities</h2>
+    <div class="rule"></div>
+    <div class="cards">
+      <article class="exhibit">
+        <div class="plate">[Photo or screenshot<br>goes here]</div>
+        <div class="cap"><span class="tag">Project</span><h3>[Title of Project]</h3><p>One sentence on what you did and what you learned.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="plate">[Photo or screenshot<br>goes here]</div>
+        <div class="cap"><span class="tag">Activity</span><h3>[Club, Team or Event]</h3><p>One sentence on your role and what it meant to you.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="plate">[Photo or screenshot<br>goes here]</div>
+        <div class="cap"><span class="tag">Activity</span><h3>[Club, Team or Event]</h3><p>One sentence on your role and what it meant to you.</p></div>
+      </article>
     </div>
+  </section>
 
+  <section id="future">
+    <h2>Future Plans</h2>
+    <div class="rule"></div>
+    <ol class="pipe">
+      <li><div class="valve">I</div><div class="body"><span class="when">[Month Year]</span><h3>Graduate</h3><p>Finish high school and any dual enrollment credits.</p></div></li>
+      <li><div class="valve">II</div><div class="body"><span class="when">[Month Year]</span><h3>Next Step</h3><p>College, trade program, work, or another path, and why you chose it.</p></div></li>
+      <li><div class="valve">III</div><div class="body"><span class="when">[Year]</span><h3>Longer-Term Goal</h3><p>Where you hope this leads in five to ten years.</p></div></li>
+    </ol>
+  </section>
 
+  <section id="reflection">
+    <h2>Reflection</h2>
+    <div class="rule"></div>
+    <div class="panel rivets">
+      <blockquote>
+        Write the most important thing this project taught you here, in your own words.
+        <footer>[Your Name], Capstone Reflection</footer>
+      </blockquote>
+      <p style="margin-top:1.2rem">Add a short paragraph on what you would do differently and what you are proud of.</p>
+    </div>
+  </section>
 
-  </div>
-  <footer>© 2026 Liam Fryar &nbsp;·&nbsp; Windsor Charter Academy</footer>
-</div>
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="rule"></div>
+    <div class="panel rivets">
+      <p>Questions about the project? Reach me at <span class="mono">[your.email@example.com]</span>.</p>
+    </div>
+  </section>
 
-<!-- ══════════════ JS ══════════════ -->
+  <footer class="site">&copy; 2026 [Your Name] &middot; Built with brass, steam, and a little patience</footer>
+</main>
+
 <script>
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    document.getElementById('nav-' + id).classList.add('active');
-    window.scrollTo(0, 0);
+(function () {
+  function pol(cx, cy, r, a) { return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+  var t = document.getElementById("ticks");
+  if (t) {
+    var out = "";
+    for (var i = 0; i <= 10; i++) {
+      var ang = Math.PI + (i / 10) * Math.PI;
+      var p1 = pol(100, 100, 82, ang), p2 = pol(100, 100, i % 5 === 0 ? 70 : 75, ang);
+      out += '<line x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) + '"/>';
+    }
+    t.innerHTML = out;
   }
+})();
 </script>
 
-</body>
-</html>
+</body></html>
