@@ -1,9 +1,11 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clockwork Capstone</title>
-<meta name="viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap">
 <style>
-/* Layout: sticky brass nav, hero with meshing gears and a pressure gauge, then riveted panels for each section. */
 :root {
   --bg: #1a130e;
   --panel: #2a1e16;
@@ -32,17 +34,13 @@ body {
   font-size: 1.15rem;
   line-height: 1.6;
 }
-body::before {
-  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
-  z-index: 10; background: var(--bg);
-}
 a { color: var(--brass); }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--verdigris); outline-offset: 3px; }
-.wrap { width: 100%; max-width: 1072px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a:focus-visible { outline: 3px solid var(--verdigris); outline-offset: 3px; }
+.wrap { width: 100%; max-width: 1072px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
 
 /* nav */
 .nav {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  position: sticky; top: 0; z-index: 5;
   background: rgba(26,19,14,.94);
   border-bottom: 2px solid var(--brass);
   box-shadow: 0 2px 0 #000, 0 6px 14px rgba(0,0,0,.5);
@@ -54,7 +52,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--verdigris); out
 .nav li a:hover { color: var(--parchment); }
 
 /* hero */
-.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem; align-items: center; padding-block: 3.5rem 3rem; }
+.hero { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; padding-block: 3.5rem 3rem; }
 .hero > * { min-width: 0; }
 .eyebrow { font-family: var(--font-util); color: var(--copper); text-transform: uppercase; letter-spacing: .14em; font-size: .9rem; margin: 0 0 .8rem; }
 h1 { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.1; margin: 0 0 1rem; color: var(--brass); text-wrap: balance; text-shadow: 0 2px 0 #000; }
@@ -67,11 +65,6 @@ h1 { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.6rem); line
 }
 .btn.ghost { background: transparent; color: var(--brass); box-shadow: none; }
 .btn:hover { filter: brightness(1.12); }
-.machine { display: grid; place-items: center; gap: 1rem; }
-.machine svg { width: 100%; height: auto; max-width: 400px; }
-.needle { transform-origin: 100px 100px; transform: rotate(38deg); animation: wobble 5s ease-in-out infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes wobble { 0%,100% { transform: rotate(38deg); } 50% { transform: rotate(46deg); } }
 
 /* sections */
 section { padding-block: 2.5rem; scroll-margin-top: 4.5rem; }
@@ -79,7 +72,7 @@ h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 2.1rem); co
 .rule { height: 10px; margin: 0 0 1.6rem; background: repeating-linear-gradient(90deg, var(--brass) 0 18px, transparent 18px 26px); opacity: .55; border-radius: 5px; }
 .panel {
   position: relative; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 6px;
-  padding: 1.6rem 1.6rem 1.6rem; box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--panel-edge), 0 8px 22px rgba(0,0,0,.45);
+  padding: 1.6rem; box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--panel-edge), 0 8px 22px rgba(0,0,0,.45);
 }
 .panel::before, .panel::after, .rivets::before, .rivets::after {
   content: ""; position: absolute; width: 10px; height: 10px; border-radius: 50%;
@@ -93,7 +86,7 @@ h3 { font-family: var(--font-util); font-weight: 400; font-size: 1.05rem; color:
 p { margin: 0 0 1rem; }
 .ph { color: var(--muted); font-style: italic; }
 
-/* process: a real sequence, drawn as a pipeline */
+/* future plans pipeline */
 .pipe { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; position: relative; }
 .pipe li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; align-items: start; position: relative; }
 .pipe li:not(:last-child)::before {
@@ -109,7 +102,7 @@ p { margin: 0 0 1rem; }
 .pipe .when { font-family: var(--font-util); font-size: .85rem; color: var(--copper); letter-spacing: .08em; text-transform: uppercase; }
 .pipe .body p { margin: .2rem 0 0; }
 
-/* exhibits */
+/* projects */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
 .cards > * { min-width: 0; }
 .exhibit { background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
@@ -118,6 +111,8 @@ p { margin: 0 0 1rem; }
   font-family: var(--font-util); color: var(--muted); font-size: .95rem;
   background: repeating-linear-gradient(45deg, #231911 0 12px, #2c2017 12px 24px); border-bottom: 2px solid var(--brass);
 }
+.plate.has-img { position: relative; overflow: hidden; padding: 0; background: #fff; }
+.plate.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
 .exhibit .cap { padding: 1rem 1.1rem 1.2rem; }
 .exhibit .cap .tag { font-family: var(--font-util); font-size: .8rem; color: var(--copper); letter-spacing: .12em; text-transform: uppercase; }
 .exhibit h3 { color: var(--parchment); text-transform: none; letter-spacing: .02em; font-size: 1.2rem; margin: .2rem 0 .4rem; }
@@ -134,20 +129,16 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
 .skills li::marker { color: var(--brass); }
 
 @media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; padding-block: 2rem; }
+  .hero { padding-block: 2rem; }
   .two, .cards { grid-template-columns: 1fr; }
-  .machine { order: -1; }
-  .machine svg { max-width: 300px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .needle { animation: none; }
 }
 </style>
+</head>
+<body>
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">The Clockwork Capstone</a>
+    <a class="brand" href="#top">Liam Fryar</a>
     <nav aria-label="Sections">
       <ul>
         <li><a href="#about">All About Me</a></li>
@@ -163,33 +154,13 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
 <main class="wrap" id="top">
   <div class="hero">
     <div>
-      <p class="eyebrow">Senior Capstone &middot; [Class of 20XX]</p>
-      <h1>[Your Project Title Goes Here]</h1>
-      <p class="lede">How I have grown during high school, and where my plans lead next. Replace this line with your own summary.</p>
+      <p class="eyebrow">Senior Capstone &middot; Class of 2027</p>
+      <h1>Senior Capstone Project</h1>
+      <p class="lede">Difficult problems often require interesting solutions. Keep working. You’ll find your way. For example, I have a younger brother with autism running away from me at school. He was super emotional because he couldn’t say goodbye to his friend. My goal was to get my brother to be happy and follow me to the car without an issue. I started going through a list of ways to succeed and everything I could imagine would theoretically fail and make things worse. I eventually came up with an idea. I take my phone out, go to my contact list and select myself. So that way when the text happens I will get it instead of someone else. Then I tell my brother that you can text your friend goodbye. The risk was that he knew how to read my name. But at his age I didn’t believe he could do that. It worked. He came home much happier and way more compliant. Overall finding creative solutions that are truly outside the box can find your way to a much easier life.</p>
       <div class="btns">
         <a class="btn" href="#projects">See My Projects</a>
         <a class="btn ghost" href="#future">Future Plans</a>
       </div>
-    </div>
-    <div class="machine" aria-hidden="true">
-      <svg viewBox="0 0 200 124" role="img" aria-label="Pressure gauge showing the project nearly complete" style="max-width:320px">
-        <defs>
-          <radialGradient id="brassG" cx="35%" cy="30%" r="80%">
-            <stop offset="0" stop-color="#f1d28a"/><stop offset=".6" stop-color="#c8993f"/><stop offset="1" stop-color="#7a5519"/>
-          </radialGradient>
-          <radialGradient id="copperG" cx="35%" cy="30%" r="80%">
-            <stop offset="0" stop-color="#e59a6b"/><stop offset=".6" stop-color="#b9683b"/><stop offset="1" stop-color="#6a3519"/>
-          </radialGradient>
-        </defs>
-        <circle cx="100" cy="100" r="92" fill="#1f160f" stroke="url(#brassG)" stroke-width="8"/>
-        <path d="M 28 100 A 72 72 0 0 1 172 100" fill="none" stroke="#4a3524" stroke-width="10"/>
-        <path d="M 28 100 A 72 72 0 0 1 128 34" fill="none" stroke="#7fb0a6" stroke-width="10" opacity=".85"/>
-        <g id="ticks" stroke="#d1a246" stroke-width="2"></g>
-        <rect x="2" y="102" width="196" height="18" rx="4" fill="url(#brassG)" stroke="#3b2a0d" stroke-width="2"/>
-        <text x="100" y="115" text-anchor="middle" font-family="Special Elite, monospace" font-size="10" letter-spacing="2" fill="#2a1e16">PROGRESS</text>
-        <g class="needle"><line x1="100" y1="100" x2="100" y2="38" stroke="#ecdfc3" stroke-width="3" stroke-linecap="round"/></g>
-        <circle cx="100" cy="100" r="7" fill="url(#brassG)" stroke="#3b2a0d"/>
-      </svg>
     </div>
   </div>
 
@@ -200,11 +171,11 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
       <div class="two">
         <div>
           <h3>Who I Am</h3>
-          <p>Introduce yourself: your interests, your school, and what matters to you. <span class="ph">[Replace with your own text.]</span></p>
+          <p>I am Liam Fryar in my senior year. I love to code and 3D model. I spent 3 years on the vex team and the first two years of high school in the soccer team as a defender. I enjoy playing horror games with my friends and more competitive first person shooters by myself. I use my time to model in the 3rd dimension for fun. I also like to code like making this website. Also I love to walk my dog Ginny.</p>
         </div>
         <div>
           <h3>How I Have Grown</h3>
-          <p>Describe how you have changed since freshman year and what caused it. <span class="ph">[Replace with your own text.]</span></p>
+          <p>I was a crazy antisocial person since entering my freshman year in this high school. Two cousins of mine brought me to their friend group and absolutely did NOT introduce me to anyone, which is how I made more friends for the first time and eventually found my best friend on my own. Now I am more social and I try to work harder on character faults and of course school.</p>
         </div>
       </div>
     </div>
@@ -218,17 +189,16 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
         <div>
           <h3>Skills</h3>
           <ul class="skills">
-            <li>[Skill, such as teamwork or communication]</li>
-            <li>[Skill, such as problem solving]</li>
-            <li>[Skill, such as a tool or program you use]</li>
+            <li>Team Work</li>
+            <li>Very Creative Problem Solving</li>
+            <li>Experience in 3D modeling</li>
           </ul>
         </div>
         <div>
           <h3>Work and Volunteering</h3>
           <ul class="skills">
-            <li>[Job or volunteer role, dates, and one thing you did]</li>
-            <li>[Job or volunteer role, dates, and one thing you did]</li>
-            <li>[Certification or award, if you have one]</li>
+            <li>Volunteer at Iron Horse Therapeutic Farm</li>
+            <li>Tech Assistant Intern</li>
           </ul>
         </div>
       </div>
@@ -240,16 +210,16 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
     <div class="rule"></div>
     <div class="cards">
       <article class="exhibit">
-        <div class="plate">[Photo or screenshot<br>goes here]</div>
-        <div class="cap"><span class="tag">Project</span><h3>[Title of Project]</h3><p>One sentence on what you did and what you learned.</p></div>
+        <div class="plate has-img"><img src="images/Screenshot%20From%202026-11-11%2021-12-10.png" alt="3D model of the Splicer part with two rounded arms and metal pins" loading="lazy"></div>
+        <div class="cap"><span class="tag">Project</span><h3>Splicer (Work in Progress)</h3><p>3D modeling is actually more complicated than you may think. The easy part is imagining what you want in 3 dimensions with moving parts and how it works. Then the hard part is translating thought to software to 3D printer. It is much harder because you need to learn how to model, how to make the clearance your part requires and all the mechanism required for the model to work in the real world.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="plate has-img"><img src="images/Nh1QEepQ.jpeg" alt="Our VEX robot, a square metal chassis with green wheels, a brain and a battery" loading="lazy"></div>
+        <div class="cap"><span class="tag">Activity</span><h3>Vex</h3><p>Vex involves coding a robot to complete a task. It is also a difficult task because you often have to deal with really bad and cheap components that create a lot of inaccurate readings on the motors. Other skills you need are creative reasoning, teamwork, and some serious patience.</p></div>
       </article>
       <article class="exhibit">
         <div class="plate">[Photo or screenshot<br>goes here]</div>
-        <div class="cap"><span class="tag">Activity</span><h3>[Club, Team or Event]</h3><p>One sentence on your role and what it meant to you.</p></div>
-      </article>
-      <article class="exhibit">
-        <div class="plate">[Photo or screenshot<br>goes here]</div>
-        <div class="cap"><span class="tag">Activity</span><h3>[Club, Team or Event]</h3><p>One sentence on your role and what it meant to you.</p></div>
+        <div class="cap"><span class="tag">Activity</span><h3>Soccer</h3><p>Soccer involves a lot of communication, which I struggled with just like my teammates have. When we did communicate we did so much better.</p></div>
       </article>
     </div>
   </section>
@@ -258,9 +228,9 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
     <h2>Future Plans</h2>
     <div class="rule"></div>
     <ol class="pipe">
-      <li><div class="valve">I</div><div class="body"><span class="when">[Month Year]</span><h3>Graduate</h3><p>Finish high school and any dual enrollment credits.</p></div></li>
-      <li><div class="valve">II</div><div class="body"><span class="when">[Month Year]</span><h3>Next Step</h3><p>College, trade program, work, or another path, and why you chose it.</p></div></li>
-      <li><div class="valve">III</div><div class="body"><span class="when">[Year]</span><h3>Longer-Term Goal</h3><p>Where you hope this leads in five to ten years.</p></div></li>
+      <li><div class="valve">I</div><div class="body"><span class="when">May, 2027</span><h3>Graduate</h3><p>Finish high school and any dual enrollment credits.</p></div></li>
+      <li><div class="valve">II</div><div class="body"><span class="when">2027-2028</span><h3>Next Step</h3><p>Gap Year where I will work hard and save aggressively for college</p></div></li>
+      <li><div class="valve">III</div><div class="body"><span class="when">2029</span><h3>Longer-Term Goal: Save for college</h3><p>After being able to afford a college I like or something that works I want to get a Bachelors degree in computer science</p></div></li>
     </ol>
   </section>
 
@@ -269,10 +239,11 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
     <div class="rule"></div>
     <div class="panel rivets">
       <blockquote>
-        Write the most important thing this project taught you here, in your own words.
-        <footer>[Your Name], Capstone Reflection</footer>
+        Writing code is very hard. The amount of trouble shooting and googling for the right type of code took hours to do. Getting all the text to line up correctly was the hardest part of the project. Making a website is very difficult as a beginner and took longer than I would've liked to create this website. I used new methods to create this website than an older one which I will link for those who are curious.
+        <br><br>
+        <a href="https://snoopytime68.github.io/Famous-Cosmologist/">My earlier website: Famous Cosmologist</a>
+        <footer>Liam Fryar, Capstone Reflection</footer>
       </blockquote>
-      <p style="margin-top:1.2rem">Add a short paragraph on what you would do differently and what you are proud of.</p>
     </div>
   </section>
 
@@ -280,27 +251,12 @@ footer.site { text-align: center; font-family: var(--font-util); color: var(--mu
     <h2>Contact</h2>
     <div class="rule"></div>
     <div class="panel rivets">
-      <p>Questions about the project? Reach me at <span class="mono">[your.email@example.com]</span>.</p>
+      <p>Questions about the project? Reach me at <a class="mono" href="mailto:Liam.f@windsorcharteracademy.org">Liam.f@windsorcharteracademy.org</a>.</p>
     </div>
   </section>
 
-  <footer class="site">&copy; 2026 [Your Name] &middot; Built with brass, steam, and a little patience</footer>
+  <footer class="site">&copy; 2026 Liam Fryar &middot; Built with brass, steam, and a little patience</footer>
 </main>
 
-<script>
-(function () {
-  function pol(cx, cy, r, a) { return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
-  var t = document.getElementById("ticks");
-  if (t) {
-    var out = "";
-    for (var i = 0; i <= 10; i++) {
-      var ang = Math.PI + (i / 10) * Math.PI;
-      var p1 = pol(100, 100, 82, ang), p2 = pol(100, 100, i % 5 === 0 ? 70 : 75, ang);
-      out += '<line x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) + '"/>';
-    }
-    t.innerHTML = out;
-  }
-})();
-</script>
-
-</body></html>
+</body>
+</html>
